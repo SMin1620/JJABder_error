@@ -1,20 +1,6 @@
-<!DOCTYPE html>
+{% extends 'base/base.html' %}
 
-{% load static %}
-
-<html lang="ko-KR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/css/home.css">
-    <link rel="shortcut icon" href="./images/catpaw.png">
-    <script src="https://kit.fontawesome.com/26a062b285.js" crossorigin="anonymous"></script>
-    <title>limrim</title>
-
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'js/slide.js' %}" type="text/javascript">
-</head>
+{% block body %}
 <body>
 <a href="#footer-scroll" class="scroll bottom" role="button">최하단이동</a>
 <header class="header">
@@ -23,8 +9,6 @@
     {% include 'base/nav.html' %}
 
 </header>
-
-
 <div class="visual-top" aria-hidden="true">
     <div class="carousel">
         <ul class="slides">
@@ -424,4 +408,5 @@
 <script src="/static/js/slide.js"></script>
 <div id="footer-scroll"></div>
 </body>
-</html>
+
+{% endblock %}

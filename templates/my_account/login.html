@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% load static %}
+
+{% block body %}
+
+<a href="#footer-scroll" class="scroll bottom" role="button">최하단이동</a>
+<header class="header">
+    <h1 class="logo"><a href="#"><img src="https://www.limrim.co.kr/web/upload/ga09/logo.png" alt="림림 로고"></a></h1>
+
+    {% include 'base/nav.html' %}
+
+</header>
+<div class="login-page">
+    <div class="form">
+        <form class="login">
+            <input type="text" placeholder="username"/>
+            <input type="password" placeholder="password"/>
+            <button>login</button>
+            <p class="message">Not registered? <a href="#">Create an account</a></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
