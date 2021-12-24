@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'facebook',
+        'NAME': 'JJABder_error',
         'USER': 'root',
         'PASSWORD': '1234',
         'HOST': 'localhost',

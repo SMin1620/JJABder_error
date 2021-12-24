@@ -1,16 +1,24 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from .models import Product, Category
+
 
 
 # Create your views here.
 class HomeView(TemplateView):
     template_name = 'home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
 
-class LoginView(TemplateView):
-    template_name = 'my_account/login.html'
+        context['products'] = Product.objects.all()
+
+        return context
 
 
-class RegisterView(TemplateView):
-    template_name = 'my_account/join_us.html'
+
+class IntroView(TemplateView):
+    template_name = 'intro.html'
+
+
 
