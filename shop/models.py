@@ -1,11 +1,11 @@
 from django.db import models
-from django.contrib.auth.models import User
+
 
 # Create your models here.
-
 # 카테고리 모델
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True, allow_unicode=True, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -15,6 +15,7 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(max_length=200)
     price = models.IntegerField()
+    quantity = models.IntegerField()
     image = models.ImageField(null=True, blank=True)
     img_url = models.URLField('url', unique=True, null=True, blank=True)
 

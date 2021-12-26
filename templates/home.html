@@ -1,12 +1,15 @@
 {% extends 'base/base.html' %}
 
+{% load static %}
+
 {% block body %}
 <body>
 <a href="#footer-scroll" class="scroll bottom" role="button">최하단이동</a>
 <header class="header">
-    <h1 class="logo"><a href="#"><img src="https://www.limrim.co.kr/web/upload/ga09/logo.png" alt="림림 로고"></a></h1>
+    <h1 class="logo"><a href="#"><h1 style="width: 100px; height: 50px;">JJABder</h1></a></h1>
 
     {% include 'base/nav.html' %}
+
 
 </header>
 <div class="visual-top" aria-hidden="true">
@@ -195,10 +198,13 @@
                     <figure>
                         <img class="new-arrivals-img"
                                 src="{{ product.img_url }}" art="Tweed jacket">
-                        <figcaption class="new-arrivals-desc">Tweed jacket</figcaption>
+                        <figcaption class="new-arrivals-desc">{{ product.title }}</figcaption>
                     </figure>
                 </a>
-                <span>{{ product.price }}</span><span class="sold-out">판매완료</span>
+                <span>{{ product.price }}</span>
+                {% if product.quantity == 0 %}
+                <span class="sold-out">판매완료</span>
+                {% endif %}
 <!--                <a href="#">-->
 <!--                    <figure>-->
 <!--                        <img class="new-arrivals-img"-->
