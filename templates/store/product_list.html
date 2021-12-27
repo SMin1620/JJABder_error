@@ -4,18 +4,12 @@
 
 {% block body %}
 <body>
-<a href="#footer-scroll" class="scroll bottom" role="button">최하단이동</a>
-<header class="header">
-    <h1 class="logo"><a href="#"><h1 style="width: 100px; height: 50px;">JJABder</h1></a></h1>
-
-    {% include 'base/nav.html' %}
-
-</header>
-
 <!--Product List-->
 <main class="main-contents">
     <section class="new-arrivals">
         <ul>
+            {% if product_list.exists %}
+            {% for product in product_list %}
             <li>
                 <a href="#">
                     <figure>
@@ -29,6 +23,8 @@
                 <span class="sold-out">판매완료</span>
                 {% endif %}
             </li>
+            {% endfor %}
+            {% endif %}
         </ul>
     </section>
 </main>
