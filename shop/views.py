@@ -13,6 +13,7 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(**kwargs)
 
         context['products'] = Product.objects.all()
+        context['categories'] = Category.objects.all()
 
         return context
 
@@ -23,7 +24,7 @@ class IntroView(TemplateView):
 
 
 # 상품 전체 리스트
-class ProductListView(TemplateView):
+class ProductListView(ListView):
     model = Product
     template_name = 'store/product_list.html'
     ordering = '-pk'
@@ -32,18 +33,18 @@ class ProductListView(TemplateView):
         context = super(ProductListView, self).get_context_data(**kwargs)
 
         context['products'] = Product.objects.all()
+        context['categories'] = Category.objects.all()
 
         return context
-
-
-# 네비게이션 용 카테고리 리스트
 
 
 # 카테고리 별 리스트
 def category_page(request, slug):
     category = Category.objects.get(slug=slug)
     context = {
-        'product_list': Product.objects.filter(category=category)
+        'category': category,
+        'product_list': Product.objects.filter(category=category),
+        'categories': Category.objects.all()
     }
 
     return render(request, 'store/product_list.html', context)

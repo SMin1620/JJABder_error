@@ -24,7 +24,7 @@
             <a href="{% url 'product_list' %}" tabindex=-1> Store <i class="fas fa-angle-down"></i></a>
             <ul>
                 {% for category in categories %}
-                <li class="dropdown-sub-menu"><a href="{{ category.get_absolute_url }}">{{ category }} test</a></li>
+                <li class="dropdown-sub-menu"><a href="{{ category.get_absolute_url }}">{{ category.name }} test</a></li>
                 {% endfor %}
                 <li class="dropdown-sub-menu"><a href="#">코트 & 블레이저</a></li>
                 <li class="dropdown-sub-menu"><a href="#">재킷 & 점퍼</a></li>

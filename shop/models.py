@@ -10,6 +10,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return f'/product/{self.slug}/'
+
 
 # 상품 모델
 class Product(models.Model):

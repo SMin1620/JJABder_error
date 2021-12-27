@@ -3,15 +3,6 @@
 {% load static %}
 
 {% block body %}
-<body>
-<a href="#footer-scroll" class="scroll bottom" role="button">최하단이동</a>
-<header class="header">
-    <h1 class="logo"><a href="#"><h1 style="width: 100px; height: 50px;">JJABder</h1></a></h1>
-
-    {% include 'base/nav.html' %}
-
-
-</header>
 <div class="visual-top" aria-hidden="true">
     <div class="carousel">
         <ul class="slides">
@@ -425,6 +416,5 @@
 <a href="#" class="scroll top" role="button">최상단 이동</a>
 <script src="/static/js/slide.js"></script>
 <div id="footer-scroll"></div>
-</body>
 
 {% endblock %}
