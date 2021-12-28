@@ -2,6 +2,11 @@ from django.db import models
 
 
 # Create your models here.
+
+def image_upload_path(instance, filename):
+    return 'product_{} / {}'.format(instance.product.id, filename)
+
+
 # 카테고리 모델
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -21,15 +26,12 @@ class Product(models.Model):
     quantity = models.IntegerField()
     image = models.ImageField(null=True, blank=True)
     img_url = models.URLField('url', unique=True, null=True, blank=True)
+    image = models.ImageField(upload_to=image_upload_path)
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product_category', null=True, blank=True)
 
     def __str__(self):
         return '{} : {}'.format(self.title, self.price)
-
-
-def image_upload_path(instance, filename):
-    return 'product_{} / {}'.format(instance.product.id, filename)
 
 
 # 이미지 모델
@@ -38,10 +40,9 @@ class Image(models.Model):
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='image_product')
     image = models.ImageField(upload_to=image_upload_path)
-    order = models.SmallIntegerField() # 상세페이지 이미지 순서
 
-    class Meta:
-        ordering = ['order']
+    def __str__(self):
+        return self.product
 
 
 
