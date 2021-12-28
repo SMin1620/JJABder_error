@@ -28,6 +28,20 @@ class Product(models.Model):
         return '{} : {}'.format(self.title, self.price)
 
 
+def image_upload_path(instance, filename):
+    return 'product_{} / {}'.format(instance.product.id, filename)
+
+
+# 이미지 모델
+class Image(models.Model):
+    UPLOAD_PATH = 'product-upload'
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='image_product')
+    image = models.ImageField(upload_to=image_upload_path)
+    order = models.SmallIntegerField() # 상세페이지 이미지 순서
+
+    class Meta:
+        ordering = ['order']
 
 
 
