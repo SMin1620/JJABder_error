@@ -4,6 +4,14 @@
 
 {% block body %}
 <body>
-
+<main class="main-contents">
+    {% if images.exists %}
+    {% for image in images %}
+    <figure>
+        <img style="width: 200; height: 400;" src="{{ image.image.url }}">
+    </figure>
+    {% endfor %}
+    {% endif %}
+</main>
 </body>
 {% endblock %}

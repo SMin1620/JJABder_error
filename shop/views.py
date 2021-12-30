@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from .models import Product, Category
+from .models import Product, Category, Image
 
 
 # Create your views here.
@@ -48,4 +48,21 @@ def category_page(request, slug):
     }
 
     return render(request, 'store/product_list.html', context)
+
+
+# 상품 상세 화면
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'store/product_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+
+        context['images'] = Image.objects.filter(
+            product_id=self.kwargs['pk']
+        )
+        context['test'] = Image.objects.all()
+
+        return context
+
 

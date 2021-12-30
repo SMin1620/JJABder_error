@@ -26,12 +26,14 @@ class Product(models.Model):
     quantity = models.IntegerField()
     image = models.ImageField(null=True, blank=True)
     img_url = models.URLField('url', unique=True, null=True, blank=True)
-    image = models.ImageField(upload_to=image_upload_path)
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product_category', null=True, blank=True)
 
     def __str__(self):
         return '{} : {}'.format(self.title, self.price)
+
+    def get_absolute_url(self):
+        return f'/product/{self.pk}/'
 
 
 # 이미지 모델
@@ -39,10 +41,8 @@ class Image(models.Model):
     UPLOAD_PATH = 'product-upload'
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='image_product')
-    image = models.ImageField(upload_to=image_upload_path)
+    image = models.ImageField(upload_to='product/')
 
-    def __str__(self):
-        return self.product
 
 
 

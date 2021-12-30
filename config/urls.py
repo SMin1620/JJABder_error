@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
-from shop.views import HomeView, IntroView, ProductListView, category_page
+from shop.views import HomeView, IntroView, ProductListView, category_page, ProductDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +27,8 @@ urlpatterns = [
 
     # product
     path('product/', ProductListView.as_view(), name='product_list'),
-    path('product/<str:slug>/', category_page),
+    path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
+    path('product/<str:slug>/', category_page, name='product_category'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
