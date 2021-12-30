@@ -1,17 +1,34 @@
 {% extends 'base/base.html' %}
 
-{% load static %}
-
 {% block body %}
 <body>
-<main class="main-contents">
-    {% if images.exists %}
-    {% for image in images %}
-    <figure>
-        <img style="width: 200; height: 400;" src="{{ image.image.url }}">
-    </figure>
-    {% endfor %}
-    {% endif %}
-</main>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-9 mt-5">
+            {% if images.exists %}
+            {% for image in images %}
+            <div class="d-flex justify-content-start">
+                <figure>
+                    <img style="width: 80%; height: 80%;" src="{{ image.image.url }}">
+                </figure>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-3 mt-5">
+            {% for product in product %}
+            <div class="position-fixed" style="top: 200px;">
+                <h2>{{ product.title }}</h2>
+                <p>{{ product.price }}</p>
+                <p>------------------------------</p>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-secondary disabled">구매하기</button>
+                    <button type="button" class="btn btn-secondary disabled">장바구니</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 </body>
 {% endblock %}

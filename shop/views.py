@@ -61,7 +61,8 @@ class ProductDetailView(DetailView):
         context['images'] = Image.objects.filter(
             product_id=self.kwargs['pk']
         )
-        context['test'] = Image.objects.all()
+
+        context['product'] = Product.objects.filter(pk=self.kwargs['pk'])
 
         return context
 
