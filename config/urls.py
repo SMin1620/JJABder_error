@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from shop.views import HomeView, IntroView, ProductListView, category_page, ProductDetailView
+from shop.views import HomeView, IntroView, ProductListView, category_page, ProductDetailView, CartView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('product/', ProductListView.as_view(), name='product_list'),
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('product/<str:slug>/', category_page, name='product_category'),
+    path('cart/', CartView.as_view(), name='cart'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

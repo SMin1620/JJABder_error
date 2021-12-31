@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView, DetailView
-from .models import Product, Category, Image
+from .models import Product, Category, Image, Cart
 
 
 # Create your views here.
@@ -65,5 +65,26 @@ class ProductDetailView(DetailView):
         context['product'] = Product.objects.filter(pk=self.kwargs['pk'])
 
         return context
+
+
+# 장바구니 화면
+class CartView(TemplateView):
+    models = Cart
+    template_name = 'store/cart_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CartView, self).get_context_data(**kwargs)
+
+        context['carts'] = Cart.objects.all()
+
+        cart = Cart.objects.all()
+        total = 0
+        for cart in cart:
+            total += cart.product.price * cart.quantity
+
+        context['total'] = total
+
+        return context
+
 
 

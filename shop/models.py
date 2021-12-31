@@ -44,5 +44,16 @@ class Image(models.Model):
     image = models.ImageField(upload_to='product/')
 
 
+# 장바구니 모델
+class Cart(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+    quantity = models.IntegerField()
+
+    # total
+    def sub_total(self):
+        return self.product.price * self.quantity
+
+
 
 
