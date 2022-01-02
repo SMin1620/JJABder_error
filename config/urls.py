@@ -42,7 +42,8 @@ urlpatterns = [
     path('cart/', CartView.as_view(), name='cart'),
 
     # user
-    path('login/', NonUserTemplateView.as_view(template_name='login.html'), name='login'),
+    path('login/', NonUserTemplateView.as_view(template_name='my_account/login.html'), name='login'),
+    path('register/', NonUserTemplateView.as_view(template_name='my_account/signup.html'), name='signup'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

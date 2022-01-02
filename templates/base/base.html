@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/css/home.css" type="text/css">
     <link rel="shortcut icon" href="./images/catpaw.png">
     <script src="https://kit.fontawesome.com/26a062b285.js" crossorigin="anonymous"></script>
     <title>JJABder</title>
 
+    <!--    css-->
     <link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'js/slide.js' %}" type="text/javascript">
-    <link rel="stylesheet" href="{% static 'css/auth.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/user.css' %}" tyle="text/css">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -53,11 +53,11 @@
             <li class="sub-menu dropdown-menu3" tabindex=0>
                 <a href="#" tabindex="-1"><i class="fas fa-lock"></i> My Account <i class="fas fa-angle-down"></i></a>
                 <ul>
-                    {% if user.is_authenticate %}
+                    {% if not user.is_authenticated %}
                     <li class="dropdown-sub-menu"><a href="{% url 'login' %}">Login</a></li>
                     <li class="dropdown-sub-menu"><a href="#">Join us</a></li>
                     {% else %}
-                    <li class="dropdown-sub-menu"><a href="{% url 'cart' %}">Cart</a></li>
+                    <li class="dropdown-sub-menu"><a href="javascript:void(0);" id="LogoutButton">logout</a></li>
                     <li class="dropdown-sub-menu"><a href="#">Order List</a></li>
                     <li class="dropdown-sub-menu"><a href="#">My Page</a></li>
                     <li><a href="#">Delivery</a></li>
@@ -65,7 +65,7 @@
                 </ul>
             </li>
             <li class="sub-menu basket">
-                <a href="#" role="button"><span class="a11y-hidden">장바구니</span><i class="fas fa-shopping-cart"></i></a>
+                <a href="{% url 'cart' %}" role="button">{{ request.user }}<i class="fas fa-shopping-cart"></i></a>
             </li>
         </ul>
     </nav>
@@ -74,7 +74,26 @@
 {% block body %}
 {% endblock %}
 </body>
+
+<!--Jquery-->
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
 <!--Jquery 3.4.1-->
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous"></script>
+
+{% block script %}
+{% endblock %}
+<script>
+    $(document).ready(function(){
+        $('#LogoutButton').click(function(){
+            $.get('/apis/v1/user/logout/', {}, function(){
+                window.location = "{% url 'login' %}";
+            });
+        });
+    });
+
+</script>
+
 </html>
