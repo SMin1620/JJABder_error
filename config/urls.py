@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IntroView.as_view(), name='intro'),
     path('home/', HomeView.as_view(), name='home'),
+    path('apis/', include('apis.urls')),
 
     # product
     path('product/', ProductListView.as_view(), name='product_list'),

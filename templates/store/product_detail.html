@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 
+{% load static %}
+
 {% block body %}
 <body>
 <div class="container">
@@ -21,9 +23,10 @@
                 <h2>{{ product.title }}</h2>
                 <p>{{ product.price }}</p>
                 <p>------------------------------</p>
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-3">
                     <button type="button" class="btn btn-secondary disabled">구매하기</button>
-                    <button type="button" class="btn btn-secondary disabled">장바구니</button>
+                    <input type="hidden" id="pk" name="pk" value="{{ product.id }}">
+                    <button type="submit" id="CartCreateButton" class="btn btn-secondary">장바구니</button>
                 </div>
             </div>
             {% endfor %}
@@ -31,4 +34,24 @@
     </div>
 </div>
 </body>
+
+<!--Jquery 3.4.1-->
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+    $('#CartCreateButton').click(function() {
+        $.post('/apis/v1/cart/create/', {'pk': $('#pk').val()}, function() {
+            alert('장바구니에 담겼습니다.');
+            window.location = '{% url 'cart' %}';
+        }).fail(function(data) {
+            alert(data.responseJSON.message);
+        });
+});
+});
+
+
+</script>
+
 {% endblock %}
