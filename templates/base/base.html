@@ -45,34 +45,23 @@
                 <a href="{% url 'product_list' %}" tabindex=-1> Store <i class="fas fa-angle-down"></i></a>
                 <ul>
                     {% for category in categories %}
-                    <li class="dropdown-sub-menu"><a href="{{ category.get_absolute_url }}">{{ category.name }} test</a>
+                    <li class="dropdown-sub-menu"><a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
                     </li>
                     {% endfor %}
-                    <li class="dropdown-sub-menu"><a href="#">코트 & 블레이저</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">재킷 & 점퍼</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">티셔츠</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">스웨트셔츠 & 후디</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">니트웨어</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">셔츠</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">팬츠 & 스커트</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">가방</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">모자</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">쥬얼리</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">양말</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">액세사리</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">머플러</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">슈즈</a></li>
-                    <li class="dropdown-sub-menu"><a href="#">에이벤토리</a></li>
                 </ul>
             </li>
             <li class="sub-menu dropdown-menu3" tabindex=0>
                 <a href="#" tabindex="-1"><i class="fas fa-lock"></i> My Account <i class="fas fa-angle-down"></i></a>
                 <ul>
-                    <li class="dropdown-sub-menu"><a href="#">Login</a></li>
+                    {% if user.is_authenticate %}
+                    <li class="dropdown-sub-menu"><a href="{% url 'login' %}">Login</a></li>
                     <li class="dropdown-sub-menu"><a href="#">Join us</a></li>
+                    {% else %}
+                    <li class="dropdown-sub-menu"><a href="{% url 'cart' %}">Cart</a></li>
                     <li class="dropdown-sub-menu"><a href="#">Order List</a></li>
                     <li class="dropdown-sub-menu"><a href="#">My Page</a></li>
                     <li><a href="#">Delivery</a></li>
+                    {% endif %}
                 </ul>
             </li>
             <li class="sub-menu basket">

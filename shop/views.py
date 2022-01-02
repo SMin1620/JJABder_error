@@ -18,11 +18,6 @@ class HomeView(TemplateView):
         return context
 
 
-# 인트로
-class IntroView(TemplateView):
-    template_name = 'intro.html'
-
-
 # 상품 전체 리스트
 class ProductListView(ListView):
     model = Product
@@ -63,6 +58,7 @@ class ProductDetailView(DetailView):
         )
 
         context['product'] = Product.objects.filter(pk=self.kwargs['pk'])
+        context['categories'] = Category.objects.all()
 
         return context
 
@@ -83,6 +79,7 @@ class CartView(TemplateView):
             total += cart.product.price * cart.quantity
 
         context['total'] = total
+        context['categories'] = Category.objects.all()
 
         return context
 

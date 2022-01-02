@@ -7,25 +7,31 @@
 <!--Product List-->
 <main class="main-contents">
     <section class="new-arrivals">
-        <ul>
-            {% if product_list.exists %}
-            {% for product in product_list %}
-            <li>
-                <a href="{{ product.get_absolute_url }}">
-                    <figure>
-                        <img class="new-arrivals-img"
-                             src="{{ product.img_url }}" art="Tweed jacket">
-                        <figcaption class="new-arrivals-desc">{{ product.title }}</figcaption>
-                    </figure>
-                </a>
-                <span>{{ product.price }}</span>
-                {% if product.quantity == 0 %}
-                <span class="sold-out">판매완료</span>
-                {% endif %}
-            </li>
-            {% endfor %}
-            {% endif %}
-        </ul>
+        <div class="row mt-5">
+            <div class="mt-5">
+                <div class="mt-5">
+                    <ul>
+                        {% if product_list.exists %}
+                        {% for product in product_list %}
+                        <li>
+                            <a href="{{ product.get_absolute_url }}">
+                                <figure>
+                                    <img class="new-arrivals-img"
+                                         src="{{ product.img_url }}" art="Tweed jacket">
+                                    <figcaption class="new-arrivals-desc">{{ product.title }}</figcaption>
+                                </figure>
+                            </a>
+                            <span>{{ product.price }}</span>
+                            {% if product.quantity == 0 %}
+                            <span class="sold-out">판매완료</span>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 

@@ -17,13 +17,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
+from django.shortcuts import redirect
 
-from shop.views import HomeView, IntroView, ProductListView, category_page, ProductDetailView, CartView
+from shop.views import HomeView, ProductListView, category_page, ProductDetailView, CartView
+
+
+class NonUserTemplateView(TemplateView):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_anonymous:
+            return redirect('home')
+        return super(NonUserTemplateView, self).dispatch(request, *args, **kwargs)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IntroView.as_view(), name='intro'),
-    path('home/', HomeView.as_view(), name='home'),
+    path('', HomeView.as_view(), name='home'),
     path('apis/', include('apis.urls')),
 
     # product
@@ -31,6 +40,9 @@ urlpatterns = [
     path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
     path('product/<str:slug>/', category_page, name='product_category'),
     path('cart/', CartView.as_view(), name='cart'),
+
+    # user
+    path('login/', NonUserTemplateView.as_view(template_name='login.html'), name='login'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
